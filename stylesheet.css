@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&display=swap');
+
+:root {
+  --color-red:  hsl(1, 90%, 64%);
+  --color-blue: hsl(219, 85%, 26%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-very-light-gray-blue: hsl(210, 60%, 98%);
+  --color-light-gray-blue-1: hsl(211, 68%, 94%);
+  --color-light-gray-blue-2: hsl(205, 33%, 90%);
+  --color-gray-blue: hsl(219, 14%, 63%);
+  --color-dark-gray-blue: hsl(219, 12%, 42%);
+  --color-very-dark-blue: hsl(224, 21%, 14%);
+
+  --ff-main: 'Plus Jakarta Sans', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+picture,
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+}
+
+body {
+  font-size: 16px;
+  min-height: 100vh;
+  font-family: var(--ff-main);
+  color: var(--color-gray-blue);
+  background-color: var(--color-very-light-gray-blue);
+}
+
+/* ----- Notifications ----- */
+.notification {
+  background-color: var(--color-white);
+  border-radius: 0.5em;
+  box-shadow: 0 0.75em 1em hsla(204, 100%, 95%, 0.5);
+  padding: 1em;
+}
+
+.notification__top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.notification__top__info {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-very-dark-blue);
+}
+
+.notification__top__number {
+  font-size: 0.9rem;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  border-radius: 0.4em;
+  padding: 0.3em 0.8em;
+  margin-left: 0.5em;
+}
+
+.notification__top__mark-as-read {
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  color: var(--color-dark-gray-blue);
+  background-color: transparent;
+  margin-left: auto;
+}
+
+.notification__top__mark-as-read:hover,
+.notification__top__mark-as-read:focus {
+  color: var(--color-blue);
+  transition: color 0.35s ease;
+}
+
+.notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.notification__content__container {
+  font-size: 0.85rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1em;
+  row-gap: 0.5em;
+  background-color: var(--color-very-light-gray-blue);
+  border-radius: 0.35em;
+  padding: 1.5em;
+}
+
+.notification__content__container.read {
+  background-color: initial;
+}
+
+.notification__content__container img {
+  max-width: 2.5rem;
+}
+
+.notification__content__container .private-message {
+  grid-area: 2 / 2 / 3 / 3;
+  padding: 1em;
+  color: var(--color-dark-gray-blue);
+  outline: 1px solid var(--color-light-gray-blue-1);
+  border-radius: 0.25em;
+  text-decoration: none;
+}
+
+.notification__content__container .private-message:hover,
+.notification__content__container .private-message:focus {
+  background-color: var(--color-light-gray-blue-1);
+  transition: background-color 0.35s ease-out;
+}
+
+.notification__content__container .picture {
+  display: grid;
+  column-gap: 1.5em;
+}
+
+.notification__content__container .picture .photo-post {
+  cursor: pointer;
+  grid-area: 1 / 2 / 3 / 3;
+  margin-left: auto;
+  border-radius: 0.5em;
+}
+
+.notification__content__container .picture .photo-post:hover,
+.notification__content__container .picture .photo-post:focus {
+  outline: 1px solid var(--color-light-gray-blue-2);
+  outline-offset: 3px;
+}
+
+.notification__content__container__name {
+  font-weight: 700;
+  color: var(--color-very-dark-blue);
+  text-decoration: none;
+}
+
+.notification__content__container__text {
+  color: var(--color-dark-gray-blue);
+  position: relative;
+  
+}
+
+.notification__content__container:not(.read) .notification__content__container__text::after {
+  content: "";
+  position: absolute;
+  bottom: 0.25rem;
+
+  margin-left: 0.3rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background-color: var(--color-red);
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.notification__content__container__text .link {
+  font-weight: 700;
+  color: var(--color-dark-gray-blue);
+  text-decoration: none;
+}
+
+.notification__content__container__name:hover,
+.notification__content__container__name:focus,
+.notification__content__container__text .link:hover,
+.notification__content__container__text .link:focus {
+  color: var(--color-blue);
+  transition: color 0.35s ease;
+}
+
+/* ----- Footer ----- */
+footer {
+  color: var(--color-very-dark-blue);
+  text-align: center;
+  margin-top: 1em;
+}
+
+.attribution {
+  font-size: 11px;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 64%);
+}
+
+.attribution a:visited {
+  color: hsl(270, 100%, 70%);
+}
+
+/* ----- Desktop ----- */
+@media (min-width: 43.75em) {
+  body {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 1em;
+    position: relative;
+  }
+
+  .notification {
+    max-width: 45rem;
+    padding: 1em 1.75em;
+  }
+
+  /* ----- Notification top ----- */
+  .notification__top__info {
+    font-size: 1.3rem;
+  }
+
+  .notification__top__number {
+    font-size: 0.9rem;
+  }
+
+  .notification__top__mark-as-read {
+    font-size: 1rem;
+  }
+
+  /* ----- Notification content ----- */
+  .notification__content__container {
+    font-size: 1rem;
+    padding: 1em 1.25em;
+  }
+
+  .notification__content__container img {
+    max-width: 3rem;
+  }
+
+  .notification__content__container:not(.read) .notification__content__container__text::after {
+    bottom: 0.4rem;
+  }
+
+  /* ----- Footer ----- */
+  footer {
+    position: absolute;
+    bottom: 1rem;
+  }
+}
